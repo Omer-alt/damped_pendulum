@@ -15,6 +15,10 @@ def system_ode(y, b, m, l, g):
         dy_dt (jnp.array): Time derivative of the state vector.
     """
     
+    assert m > 0, "Mass (m) must be positive"
+    assert l > 0, "Length (l) must be positive"
+    assert g > 0, "Gravity (g) must be positive"
+    
     theta, omega = y
     dtheta_dt = omega
     domega_dt = -(b / (m * l)) * omega - (g / l) * jnp.sin(theta)
@@ -96,17 +100,19 @@ def plot_solution(t, y_euler, y_runge_kutta, labels):
     
     fig, axs = plt.subplots(2, figsize=(10, 6))
     
-    axs[0].plot(t, y_euler[:, 0], label="Euler Method")
+    axs[0].plot(t, y_euler[:, 0 ], label="Euler Method")
     axs[0].plot(t, y_runge_kutta[:, 0], label="Runge-Kutta Method", linestyle='--')
     axs[0].set_title(f"{labels[0]} over Time")
     axs[0].set_ylabel(labels[0])
     axs[0].legend()
+    axs[0].grid(True)
 
     axs[1].plot(t, y_euler[:, 1], label="Euler Method")
     axs[1].plot(t, y_runge_kutta[:, 1], label="Runge-Kutta Method", linestyle='--')
     axs[1].set_title(f"{labels[1]} over Time")
     axs[1].set_ylabel(labels[1])
     axs[1].legend()
+    axs[1].grid(True)
 
     plt.xlabel("Time")
     plt.tight_layout()
