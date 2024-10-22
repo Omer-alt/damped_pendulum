@@ -3,3 +3,5 @@ jaxlib==0.4.33
 matplotlib==3.9.2
 flax==0.9.0
 optax==0.2.3
+hydra-core==1.3.2 
+omegaconf==2.3.0

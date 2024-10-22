@@ -26,7 +26,7 @@ We will generate a dataset for training using numerical methods:
 
 The ODE can be rewritten as a system of two first-order ODEs:
 
-* $\frac{d\omega}{dt} = - \frac{b}{ml} \omega - \frac{g}{l}\sin(\theta)$
+* $\frac{d\omega}{dt} = - \frac{b}{m} \omega - \frac{g}{l}\sin(\theta)$
 * $\frac{d\theta}{dt} = \omega$
 
 where $\omega = \frac{d\theta}{dt}$ is the angular velocity.
@@ -35,7 +35,7 @@ This can be expressed in vector form as:
 
 $ \frac{dy}{dt} = F(y)$ 
 
-where $y = \begin{bmatrix} \theta \\ \omega \end{bmatrix}$ and $F(y) = \begin{bmatrix} \omega  \\ - \frac{b}{ml} \omega - \frac{g}{l}\sin(\theta)\\  \end{bmatrix}$.
+where $y = \begin{bmatrix} \theta \\ \omega \end{bmatrix}$ and $F(y) = \begin{bmatrix} \omega  \\ - \frac{b}{m} \omega - \frac{g}{l}\sin(\theta)\\  \end{bmatrix}$.
 
 0. **Environment Setup:** Create a conda environment and a `requirements.txt` file, pinning each package to the appropriate version.
 
@@ -63,9 +63,9 @@ We can leverage the ODE and initial conditions to create a loss function without
 
 The loss function will consist of three terms:
 
-<!-- * **ODE Residual:** Minimize the squared residual of the ODE: $(\frac{d^2MLP(t)}{dt^2} + \frac{b}{ml} \frac{dMLP(t)}{dt} + \frac{g}{l}\sin(MLP(t)))^2$.
+* **ODE Residual:** Minimize the squared residual of the ODE: $(\frac{d^2MLP(t)}{dt^2} + \frac{b}{ml} \frac{dMLP(t)}{dt} + \frac{g}{l}\sin(MLP(t)))^2$.
 * **Initial Condition (Angle):** Minimize the squared error between the predicted initial angle and the true initial angle: $(MLP(t=0) - 2\pi/3)^2$.
-* **Initial Condition (Angular Velocity):** Minimize the squared error between the predicted initial angular velocity and the true initial angular velocity: $(\frac{dMLP(t)}{dt}(0))^2$. -->
+* **Initial Condition (Angular Velocity):** Minimize the squared error between the predicted initial angular velocity and the true initial angular velocity: $(\frac{dMLP(t)}{dt}(0))^2$.
 
 6. **`ode_loss` Implementation:** Complete the `ode_loss` function to calculate the total loss describing the ODE and the Initial conditions. Use `jax.grad` for automatic differentiation and `jax.vmap` for auto-vectorization.
 
